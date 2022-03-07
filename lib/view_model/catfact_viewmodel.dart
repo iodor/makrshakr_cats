@@ -5,20 +5,15 @@ import 'dart:math';
 class ListCatFactViewModel{
   List<CatFactViewModel>? facts;
 
-  Future<void> fetchFacts(int page, List<CatFactViewModel> allData) async {
+  Future<void> fetchFacts(int page, bool load) async {
     final result = await Service().fetchCatFact(page);
     List<CatFactViewModel> temp = result.map((e) => CatFactViewModel(e)).toList();
 
-    if(!allData.isEmpty){
-      allData.addAll(temp);
-      facts = allData;
+    if(load){
+      facts!.addAll(temp);
     }else{
       facts = temp;
     }
-  }
-
-  bool factsIsEmpty(){
-    return facts != null;
   }
 }
 

@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:makrshakr_cats/view/cardfact.dart';
 import 'package:makrshakr_cats/view_model/catfact_viewmodel.dart';
-
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,60 +15,48 @@ class _HomePageState extends State<HomePage> {
   int itemCount = 10;
   ListCatFactViewModel listCatFactViewModel = new ListCatFactViewModel();
 
-  // final RefreshController refreshController = RefreshController(initialRefresh: true);
-
-
-
+  final RefreshController refreshController =
+      RefreshController(initialRefresh: true);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('CAT FACTS'),
-        ),
-        body: RefreshIndicator(
-          onRefresh: refresh,
-          child: FutureBuilder(
-            future: listCatFactViewModel.fetchFacts(currentPage, []),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return Container(
-                  child: GridView.builder(
-                      shrinkWrap: true,
-                      itemCount: listCatFactViewModel.facts!.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        mainAxisExtent: 80,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        currentPage++;
-                        return CardFact(listCatFactViewModel.facts![index]);
-                      }),
-                );
-              }
-            },
-          ),
-        ));
+      appBar: AppBar(
+        title: Text('CAT FACTS'),
+      ),
+      body: SmartRefresher(
+        enablePullUp: true,
+        onRefresh: refresh,
+        onLoading: loading,
+        controller: refreshController,
+        child: (listCatFactViewModel.facts != null)
+            ? ListView.separated(
+                itemBuilder: (context, index) {
+                  return CardFact(listCatFactViewModel.facts![index]);
+                },
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: itemCount,
+              )
+            : Center(),
+      ),
+    );
   }
 
-  Future<void> refresh() async{
-    setState(() {
-      listCatFactViewModel.fetchFacts(currentPage, []);
-    });
+  Future<void> refresh() async {
+    log('RFRESH');
+    currentPage = 1;
+    itemCount = 10;
+    await listCatFactViewModel.fetchFacts(currentPage, false);
+    setState(() {});
+    refreshController.refreshCompleted();
   }
 
-  // Future<void> loading() async{
-  //   setState(() {
-  //     currentPage++;
-  //     listCatFactViewModel.fetchFacts(currentPage, listCatFactViewModel.facts!);
-  //     itemCount+=10;
-  //   });
-  //
-  //
-  //   refreshController.loadComplete();
-  // }
+  Future<void> loading() async {
+    log('LOADING');
+    currentPage++;
+    await listCatFactViewModel.fetchFacts(currentPage, true);
+    itemCount += 10;
+    setState(() {});
+    refreshController.loadComplete();
+  }
 }

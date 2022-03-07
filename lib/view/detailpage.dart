@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:makrshakr_cats/view_model/catfact_viewmodel.dart';
 
 class DetailPage extends StatelessWidget {
   final CatFactViewModel catFactViewModel;
 
-  DetailPage(this.catFactViewModel);
+  DetailPage(this.catFactViewModel) {
+    log('DETAIL PAGE');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +46,18 @@ class DetailPage extends StatelessWidget {
           height: 60,
           color: Colors.teal.shade700,
           child: InkWell(
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              log('BACK TO HOME');
+            },
             child: Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Column(
                 children: <Widget>[
-                  Icon(Icons.home, color: Colors.white,),
+                  Icon(
+                    Icons.home,
+                    color: Colors.white,
+                  ),
                   Text(
                     'Home',
                     style: TextStyle(

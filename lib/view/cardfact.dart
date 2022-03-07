@@ -20,9 +20,6 @@ class CardFact extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4.0))),
-          // child: Image(
-          //   image: NetworkImage('${catFactViewModel.urlImageCat}'),
-          // ),
         ),
         title: Text(
           '${catFactViewModel.catFactModel!.fact}',
