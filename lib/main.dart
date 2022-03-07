@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'view/homepage.dart';
 import 'package:flutter/services.dart';
 
+
 void main() {
   runApp(MyApp());
 }
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Arial',
+        fontFamily: 'SourceSansPro',
         cardTheme: CardTheme(
           elevation: 8.0,
           color: Colors.teal.shade600,

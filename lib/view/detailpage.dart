@@ -1,7 +1,7 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:makrshakr_cats/view_model/catfact_viewmodel.dart';
+
 
 class DetailPage extends StatelessWidget {
   final CatFactViewModel catFactViewModel;
@@ -37,7 +37,6 @@ class DetailPage extends StatelessWidget {
                         fontSize: 20,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'SourceSansPro',
                       ),
                     ),
                     SizedBox(
@@ -50,7 +49,6 @@ class DetailPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.black,
-                        fontFamily: 'SourceSansPro',
                       ),
                     ),
                   ],

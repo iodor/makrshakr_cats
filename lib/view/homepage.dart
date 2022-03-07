@@ -1,9 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:makrshakr_cats/view/cardfact.dart';
+import 'package:makrshakr_cats/components/cardfact.dart';
 import 'package:makrshakr_cats/view_model/catfact_viewmodel.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
