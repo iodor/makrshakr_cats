@@ -17,18 +17,18 @@ class DetailPage extends StatelessWidget {
           title: Text('CAT FACTS'),
           automaticallyImplyLeading: false,
         ),
-        body: Column(
-          children: [
-            Container(
-              alignment: Alignment.topCenter,
-              child:
-                  Image(image: NetworkImage('${catFactViewModel.urlImageCat}')),
-            ),
-            Container(
-              child: Expanded(
-                child: SingleChildScrollView(
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.topCenter,
+                child:
+                    Image(image: NetworkImage('${catFactViewModel.urlImageCat}')),
+              ),
+              Container(
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  scrollDirection: Axis.vertical,
                   child: Text(
                     '${catFactViewModel.catFactModel!.fact}',
                     style: TextStyle(
@@ -38,9 +38,9 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
         bottomNavigationBar: Container(
           height: 60,
