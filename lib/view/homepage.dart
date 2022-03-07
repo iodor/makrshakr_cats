@@ -1,116 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:makrshakr_cats/view/cardfact.dart';
 import 'package:makrshakr_cats/view_model/catfact_viewmodel.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
 
+class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  var body = Container(
-    child: Column(
-      children: [
-        Card(
-          color: Colors.grey.shade500,
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-          child: TextButton(
-            onPressed: (){print('ciao');},
-            child: const ListTile(
-              leading: Image(
-                image: NetworkImage('http://placekitten.com/g/100/100'),
-              ),
-              title: Text(
-                'Fatcfac tsdasdasdsaasdasdasdasdasdas',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontFamily: 'SourceSansPro',
-                ),
-              ),
-              subtitle: Text(
-                'Length: 2',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontFamily: 'SourceSansPro',
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
-    ),
-  );
-
-
+  int currentPage = 1;
+  int itemCount = 10;
   ListCatFactViewModel listCatFactViewModel = new ListCatFactViewModel();
+
+  // final RefreshController refreshController = RefreshController(initialRefresh: true);
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Makr Shakr Cats',
-          style: TextStyle(
-            fontFamily: 'Dots',
-            color: Colors.black,
-            fontSize: 25,
-          ),
+        appBar: AppBar(
+          title: Text('CAT FACTS'),
         ),
-        backgroundColor: Colors.grey.shade500,
-      ),
-      body: FutureBuilder(
-        future: listCatFactViewModel.fetchFacts(),
-        builder: (context, snapshot){
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(child: CircularProgressIndicator(),);
-          }else{
-            return Container(
-              child: GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: listCatFactViewModel.facts!.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
-                  itemBuilder: (BuildContext context, int index){
-                    return Card(
-                      color: Colors.grey.shade500,
-                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                      child: TextButton(
-                        onPressed: (){print('ciao');},
-                        child: ListTile(
-                          leading: Image(
-                            image: NetworkImage('http://placekitten.com/g/100/100'),
-                          ),
-                          title: Text(
-                            '${listCatFactViewModel.facts![index].catFactModel.fact}',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
-                              fontFamily: 'SourceSansPro',
-                            ),
-                          ),
-                          subtitle: Text(
-                            'Length: ${listCatFactViewModel.facts![index].catFactModel.length}',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
-                              fontFamily: 'SourceSansPro',
-                            ),
-                          ),
-                        ),
+        body: RefreshIndicator(
+          onRefresh: refresh,
+          child: FutureBuilder(
+            future: listCatFactViewModel.fetchFacts(currentPage, []),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return Container(
+                  child: GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: listCatFactViewModel.facts!.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        mainAxisExtent: 80,
                       ),
-                    );
-                  }
-              ),
-            );
-          }
-        },
-      )
-    );
+                      itemBuilder: (BuildContext context, int index) {
+                        currentPage++;
+                        return CardFact(listCatFactViewModel.facts![index]);
+                      }),
+                );
+              }
+            },
+          ),
+        ));
   }
+
+  Future<void> refresh() async{
+    setState(() {
+      listCatFactViewModel.fetchFacts(currentPage, []);
+    });
+  }
+
+  // Future<void> loading() async{
+  //   setState(() {
+  //     currentPage++;
+  //     listCatFactViewModel.fetchFacts(currentPage, listCatFactViewModel.facts!);
+  //     itemCount+=10;
+  //   });
+  //
+  //
+  //   refreshController.loadComplete();
+  // }
 }
