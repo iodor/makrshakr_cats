@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Arial',
         cardTheme: CardTheme(
           elevation: 8.0,
-          color: Colors.teal.shade700,
+          color: Colors.teal.shade600,
           margin: EdgeInsets.symmetric(vertical: 4, horizontal: 25),
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
               color: Colors.white,
               fontSize: 25,
             ),
-            backgroundColor: Colors.teal.shade700),
+            backgroundColor: Colors.teal.shade600),
         primarySwatch: Colors.teal,
       ),
       home: HomePage(),

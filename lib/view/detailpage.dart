@@ -26,19 +26,36 @@ class DetailPage extends StatelessWidget {
                 child:
                     Image(image: NetworkImage('${catFactViewModel.urlImageCat}')),
               ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '${catFactViewModel.catFactModel!.fact}',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.black,
-                      fontFamily: 'SourceSansPro',
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'About this fact',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'SourceSansPro',
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 10,
+                      width: 160,
+                      child: Divider(color: Colors.teal.shade900,),
+                    ),
+                    Text(
+                      '${catFactViewModel.catFactModel!.fact}',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontFamily: 'SourceSansPro',
+                      ),
+                    ),
+                  ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -51,19 +68,22 @@ class DetailPage extends StatelessWidget {
               log('BACK TO HOME');
             },
             child: Padding(
-              padding: EdgeInsets.only(top: 8.0),
+              padding: EdgeInsets.only(top: 2.0),
               child: Column(
                 children: <Widget>[
-                  Icon(
-                    Icons.home,
-                    color: Colors.white,
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Icon(
+                      Icons.home,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'Home',
                     style: TextStyle(
                       fontFamily: 'Dots',
                       color: Colors.white,
-                      fontSize: 10,
+                      fontSize: 12,
                     ),
                   ),
                 ],
