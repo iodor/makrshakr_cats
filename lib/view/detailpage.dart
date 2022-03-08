@@ -70,7 +70,7 @@ class DetailPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(2.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Icon(
                       Icons.home,
                       color: Colors.white,
