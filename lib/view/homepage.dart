@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return CardFact(listCatFactViewModel.facts![index]);
                 },
-                separatorBuilder: (context, index) => Divider(),
+                separatorBuilder: (context, index) => Divider(color: Colors.teal.shade100,),
                 itemCount: itemCount,
               )
             : Center(),
