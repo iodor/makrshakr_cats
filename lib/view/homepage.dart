@@ -4,7 +4,6 @@ import 'package:makrshakr_cats/components/cardfact.dart';
 import 'package:makrshakr_cats/view_model/catfact_viewmodel.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
@@ -34,7 +33,9 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return CardFact(listCatFactViewModel.facts![index]);
                 },
-                separatorBuilder: (context, index) => Divider(color: Colors.teal.shade100,),
+                separatorBuilder: (context, index) => Divider(
+                  color: Colors.grey[850],
+                ),
                 itemCount: itemCount,
               )
             : Center(),

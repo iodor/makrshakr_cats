@@ -35,20 +35,20 @@ class DetailPage extends StatelessWidget {
                       'About this fact',
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(
                       height: 10,
                       width: 160,
-                      child: Divider(color: Colors.teal.shade900,),
+                      child: Divider(color:  Colors.white,),
                     ),
                     Text(
                       '${catFactViewModel.catFactModel!.fact}',
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -59,7 +59,7 @@ class DetailPage extends StatelessWidget {
         ),
         bottomNavigationBar: Container(
           height: 60,
-          color: Colors.teal.shade700,
+          color:  Colors.grey[800],
           child: InkWell(
             onTap: () {
               Navigator.pop(context);

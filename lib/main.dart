@@ -18,20 +18,21 @@ class MyApp extends StatelessWidget {
         fontFamily: 'SourceSansPro',
         cardTheme: CardTheme(
           elevation: 8.0,
-          color: Colors.teal.shade600,
+          color: Colors.grey[800],
           margin: EdgeInsets.symmetric(vertical: 4, horizontal: 25),
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: Colors.white)),
         ),
-        scaffoldBackgroundColor: Colors.teal.shade100,
+        scaffoldBackgroundColor: Colors.grey[850],
         appBarTheme: AppBarTheme(
             titleTextStyle: TextStyle(
               fontFamily: 'Dots',
               color: Colors.white,
               fontSize: 25,
             ),
-            backgroundColor: Colors.teal.shade600),
+            backgroundColor: Colors.grey[800],
+        ),
         primarySwatch: Colors.teal,
       ),
       home: HomePage(),
